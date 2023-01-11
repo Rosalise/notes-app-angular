@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { clippingParents } from '@popperjs/core';
 import { Notes } from '../notes';
 import { NotesService } from '../notes.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-notes',
@@ -21,7 +22,7 @@ export class NotesComponent implements OnInit{
     note_description: ''
   }
 
-  constructor(private notes_service: NotesService, private formBuilder: FormBuilder) { 
+  constructor(private notes_service: NotesService, private formBuilder: FormBuilder, private spinner: NgxSpinnerService) { 
     this.notesForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required]
@@ -57,9 +58,11 @@ export class NotesComponent implements OnInit{
 
 
   getAllNotes() {
+    this.spinner.show();
     this.notes_service.getNotes().subscribe((res: Notes[]) => {
       console.log(res)
-      this.notes = res
+      this.notes = res;
+      this.spinner.hide();
     })
   }
 

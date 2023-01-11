@@ -25,9 +25,12 @@
 // })
 // export class AppModule { }
 
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+// Import library module
+import { NgxSpinnerModule } from "ngx-spinner";
 
 import { AppComponent } from './app.component';
 
@@ -49,7 +52,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     ReactiveFormsModule,
     NgbModule,
-
+    BrowserAnimationsModule,
+    NgxSpinnerModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
 
     provideFirestore(() => getFirestore()),
@@ -58,5 +62,6 @@ import { ReactiveFormsModule } from '@angular/forms';
   providers: [],
 
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}
